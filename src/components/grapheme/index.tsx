@@ -1,8 +1,8 @@
 import GraphemeProps, { StatusType } from "./type";
 
-const Grapheme = (graph: GraphemeProps) => {
+const Grapheme = ({ value, status }: GraphemeProps) => {
   const color = () => {
-    switch (graph.status) {
+    switch (status) {
       case StatusType.valid:
         return "bg-red-300";
       case StatusType.present:
@@ -11,7 +11,7 @@ const Grapheme = (graph: GraphemeProps) => {
         return "bg-gray-300";
     }
   };
-  return <div className={`w-12 h-12 m-2 ${color()}`}>{graph.value}</div>;
+  return <div className={`w-12 h-12 m-2 ${color()}`}>{value}</div>;
 };
 
 export default Grapheme;

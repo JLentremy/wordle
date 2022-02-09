@@ -12,6 +12,8 @@ import { newWord, randInto } from "./utils";
 type AppContextType = {
   guess: WordProps | undefined;
   attempts: WordProps[];
+  attemptsLetters: string[];
+  attemptsNb: number | undefined;
   initGuess: () => void;
   addAttempt: (str: string) => void;
   checkAttempt: () => void;
@@ -19,6 +21,8 @@ type AppContextType = {
 const AppContext = React.createContext<AppContextType>({
   guess: undefined,
   attempts: [],
+  attemptsLetters: [],
+  attemptsNb: undefined,
   initGuess: () => {
     // initially empty
   },
@@ -33,6 +37,8 @@ const AppContext = React.createContext<AppContextType>({
 export const AppProvider: React.FunctionComponent = ({ children }) => {
   const [guess, setGuess] = useState<WordProps | undefined>();
   const [attempts, setAttempts] = useState<WordProps[]>([]);
+  const [attemptsLetters, setAttemptsLetters] = useState<string[]>([]);
+  const attemptsNb = 6;
 
   const initGuess = useCallback(() => {
     setGuess(newWord(randInto(dictionary)));
@@ -55,12 +61,15 @@ export const AppProvider: React.FunctionComponent = ({ children }) => {
     () => ({
       guess,
       attempts,
+      attemptsLetters,
+      attemptsNb,
       setAttempts,
+      setAttemptsLetters,
       initGuess,
       addAttempt,
       checkAttempt,
     }),
-    [guess, attempts, initGuess, addAttempt, checkAttempt]
+    [guess, attempts, attemptsLetters, initGuess, addAttempt, checkAttempt]
   );
 
   return (
