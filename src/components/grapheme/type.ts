@@ -6,7 +6,7 @@ export enum StatusType {
 
 type GraphemeProps = {
   value: string;
-  status: StatusType;
+  status: StatusType | null;
 };
 
 export default GraphemeProps;
