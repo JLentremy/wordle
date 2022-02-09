@@ -28,10 +28,7 @@ const AppContext = React.createContext<AppContextType>({
 
 export const AppProvider: React.FunctionComponent = ({ children }) => {
   const [guess, setGuess] = useState<WordProps | undefined>();
-  const [attempts, setAttempts] = useState<WordProps[]>([
-    { value: "chiens", length: 6 },
-    { value: "clowns", length: 6 },
-  ]);
+  const [attempts, setAttempts] = useState<WordProps[]>([]);
   const newWord = (str: string) => {
     return {
       value: str,
@@ -57,7 +54,7 @@ export const AppProvider: React.FunctionComponent = ({ children }) => {
       initGuess,
       addAttempt,
     }),
-    [attempts, guess, initGuess, addAttempt]
+    [guess, attempts, initGuess, addAttempt]
   );
 
   return (

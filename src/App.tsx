@@ -9,6 +9,7 @@ import Word from "./components/word";
 
 function App() {
   const context = useAppContext();
+  console.log(context.guess?.value);
 
   return (
     <div className="App">
@@ -16,7 +17,6 @@ function App() {
         <Word key={key} {...word} />
       ))}
       <Input />
-      <button onClick={() => context.addAttempt("chaton")}>button</button>
     </div>
   );
 }
