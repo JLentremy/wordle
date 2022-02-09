@@ -6,6 +6,7 @@ const Input = () => {
   const [input, setInput] = useState("");
   const handleKeyDown = (e: any) => {
     if (e.key === "Enter") {
+      e.preventDefault();
       context.addAttempt(input);
       setInput("");
     }
@@ -14,11 +15,12 @@ const Input = () => {
   return (
     <input
       type="text"
+      className="border-2"
       value={input}
-      onChange={(e) => setInput(e.target.value)}
+      onChange={(e) => setInput(e.target.value.toUpperCase())}
       onKeyDown={handleKeyDown}
-      minLength={context.guess?.length}
-      maxLength={context.guess?.length}
+      minLength={context.guess?.value.length}
+      maxLength={context.guess?.value.length}
     />
   );
 };

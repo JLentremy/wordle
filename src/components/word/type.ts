@@ -1,6 +1,6 @@
 type WordProps = {
-  value: String;
-  length: number;
+  value: string;
+  trim: string[];
 };
 
 export default WordProps;

@@ -1,3 +1,4 @@
+import { nanoid } from "nanoid";
 import React from "react";
 import "./App.css";
 import {
@@ -13,8 +14,8 @@ function App() {
 
   return (
     <div className="App">
-      {context.attempts.map((word, key) => (
-        <Word key={key} {...word} />
+      {context.attempts.map((word) => (
+        <Word key={nanoid()} {...word} />
       ))}
       <Input />
     </div>

@@ -32,7 +32,7 @@ export const AppProvider: React.FunctionComponent = ({ children }) => {
   const newWord = (str: string) => {
     return {
       value: str,
-      length: str.length,
+      trim: str.split(""),
     };
   };
   const initGuess = useCallback(() => {
