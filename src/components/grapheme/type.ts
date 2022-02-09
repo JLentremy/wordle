@@ -1,5 +1,5 @@
-type GraphemeType = {
+type GraphemeProps = {
   value: string;
 };
 
-export default GraphemeType;
+export default GraphemeProps;

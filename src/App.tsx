@@ -12,9 +12,11 @@ function App() {
 
   return (
     <div className="App">
-      <Word value="chaton" />
+      {context.attempts.map((word, key) => (
+        <Word key={key} {...word} />
+      ))}
       <Input />
-      <div>{context.guess?.value}</div>
+      <button onClick={() => context.addAttempt("chaton")}>button</button>
     </div>
   );
 }

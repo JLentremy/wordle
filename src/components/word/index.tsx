@@ -1,10 +1,10 @@
 import Grapheme from "../grapheme";
-import WordType from "./type";
+import WordProps from "./type";
 
-const Word = ({ value }: WordType) => {
+const Word = (word: WordProps) => {
   return (
     <div className="flex">
-      {value.split("").map((g, key) => (
+      {word.value.split("").map((g, key) => (
         <Grapheme key={key} value={g} />
       ))}
     </div>

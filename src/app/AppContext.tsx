@@ -6,27 +6,43 @@ import React, {
   useState,
 } from "react";
 import dictionary from "../assets/words";
-import WordType from "../components/word/type";
+import WordProps from "../components/word/type";
 import { randomInArray } from "./utils";
 
 type AppContextType = {
-  guess: WordType | undefined;
+  guess: WordProps | undefined;
+  attempts: WordProps[];
   initGuess: () => void;
+  addAttempt: (str: string) => void;
 };
 const AppContext = React.createContext<AppContextType>({
   guess: undefined,
+  attempts: [],
   initGuess: () => {
+    // initially empty
+  },
+  addAttempt: () => {
     // initially empty
   },
 });
 
 export const AppProvider: React.FunctionComponent = ({ children }) => {
-  const [guess, setGuess] = useState<WordType | undefined>();
-  const initGuess = useCallback(() => {
-    const data: WordType = {
-      value: randomInArray(dictionary),
+  const [guess, setGuess] = useState<WordProps | undefined>();
+  const [attempts, setAttempts] = useState<WordProps[]>([
+    { value: "chiens", length: 6 },
+    { value: "clowns", length: 6 },
+  ]);
+  const newWord = (str: string) => {
+    return {
+      value: str,
+      length: str.length,
     };
-    setGuess(data);
+  };
+  const initGuess = useCallback(() => {
+    setGuess(newWord(randomInArray(dictionary)));
+  }, []);
+  const addAttempt = useCallback((str: string) => {
+    setAttempts((attempts) => attempts.concat(newWord(str)));
   }, []);
 
   useEffect(() => {
@@ -36,9 +52,12 @@ export const AppProvider: React.FunctionComponent = ({ children }) => {
   const MemoValue = useMemo(
     () => ({
       guess,
+      attempts,
+      setAttempts,
       initGuess,
+      addAttempt,
     }),
-    [guess, initGuess]
+    [attempts, guess, initGuess, addAttempt]
   );
 
   return (

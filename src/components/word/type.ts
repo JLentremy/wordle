@@ -1,5 +1,6 @@
-type WordType = {
+type WordProps = {
   value: String;
+  length: number;
 };
 
-export default WordType;
+export default WordProps;
