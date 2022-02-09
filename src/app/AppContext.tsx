@@ -44,14 +44,17 @@ export const AppProvider: React.FunctionComponent = ({ children }) => {
     setGuess(newWord(randInto(dictionary)));
   }, []);
 
-  const addAttempt = useCallback((str: string) => {
-    setAttempts((attempts) => attempts.concat(newWord(str)));
-    checkAttempt();
-  }, []);
-
   const checkAttempt = useCallback(() => {
     // verifier si les lettres correspondent entre guess et attempt
   }, []);
+
+  const addAttempt = useCallback(
+    (str: string) => {
+      setAttempts((attempts) => attempts.concat(newWord(str)));
+      checkAttempt();
+    },
+    [checkAttempt]
+  );
 
   useEffect(() => {
     initGuess();
